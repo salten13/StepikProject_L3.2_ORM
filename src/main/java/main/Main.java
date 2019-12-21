@@ -42,8 +42,7 @@ public class Main {
         context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
         context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/signin");
 
-        HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { context });
+
 
         try {
 

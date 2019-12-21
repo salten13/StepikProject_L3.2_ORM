@@ -44,13 +44,14 @@ public class SignUpServlet extends javax.servlet.http.HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         Map<String, Object> pageVariables = createPageVariablesMap(request);
 
         response.getWriter().println(PageGenerator.instance().getPage("signup.html", pageVariables));
 
         response.setContentType("text/html;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
+
+
     }
 
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
