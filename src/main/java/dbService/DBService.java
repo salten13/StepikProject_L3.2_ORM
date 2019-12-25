@@ -3,6 +3,8 @@ package dbService;
 
 import dbService.dataSets.UsersDataSet;
 
+import java.util.List;
+
 public interface DBService {
 
 
@@ -13,5 +15,7 @@ public interface DBService {
     long getUserId(String login) throws DBException;
 
     void printConnectInfo();
+
+    List<UsersDataSet> getAlldataList() throws DBException;
 
 }

@@ -3,8 +3,14 @@ package dbService.dao;
 import dbService.dataSets.UsersDataSet;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author v.chibrikov
@@ -36,5 +42,15 @@ public class UsersDAO {
 
     public long insertUser(String login, String pass) throws HibernateException {
         return (long) session.save(new UsersDataSet(login, pass));
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<UsersDataSet> getAlldata(){
+        try
+        {
+            return session.createCriteria(UsersDataSet.class).list();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 }

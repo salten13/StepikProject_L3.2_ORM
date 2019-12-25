@@ -13,6 +13,8 @@ import org.hibernate.service.ServiceRegistry;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author v.chibrikov
@@ -98,6 +100,18 @@ public class DBServiceImpl implements DBService {
             transaction.commit();
             session.close();
             return id;
+        } catch (HibernateException e) {
+            throw new DBException(e);
+        }
+    }
+
+    public List<UsersDataSet> getAlldataList() throws DBException{
+        try {
+            Session session = sessionFactory.openSession();
+            UsersDAO dao = new UsersDAO(session);
+             List<UsersDataSet> usersDataSets   =  dao.getAlldata();
+            session.close();
+            return usersDataSets;
         } catch (HibernateException e) {
             throw new DBException(e);
         }

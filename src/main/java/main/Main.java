@@ -22,6 +22,9 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author v.chibrikov
@@ -46,22 +49,30 @@ public class Main {
 
 
 
-        try {
+//        try {
+//            System.out.println("Hello");
+//
+//
+//            if(accountService.getId("tully") == 0L ){
+//
+//                long userId = accountService.addNewUser("tully", "tully1");
+//
+//            System.out.println("Added user id: " + userId);
+//
+//            UsersDataSet dataSet = accountService.getUserById(userId);
+//            System.out.println("User data set: " + dataSet);
+//
+//
+////            }
+//
+//
+//        } catch (DBException e) {
+//            e.printStackTrace();
+//        }
 
-            if(accountService.getId("tully") == 0 ){
-
-                long userId = accountService.addNewUser("tully", "tully1");
-
-            System.out.println("Added user id: " + userId);
-
-            UsersDataSet dataSet = accountService.getUserById(userId);
-            System.out.println("User data set: " + dataSet);
-
-            }
-
-
-        } catch (DBException e) {
-            e.printStackTrace();
+        List<UsersDataSet> vasya =  dbService.getAlldataList();
+        for(UsersDataSet u : vasya){
+            System.out.println(u.getId() + "   " + u.getLogin() + "   " + u.getPassword());
         }
 
 
@@ -71,5 +82,7 @@ public class Main {
         server.start();
         System.out.println("Server started");
         server.join();
+
+
     }
 }

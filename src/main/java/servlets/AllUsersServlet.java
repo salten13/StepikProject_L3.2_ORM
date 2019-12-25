@@ -2,6 +2,7 @@ package servlets;
 
 import accounts.AccountService;
 import dbService.DBException;
+import dbService.dataSets.UsersDataSet;
 import templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -22,23 +23,29 @@ public class AllUsersServlet extends javax.servlet.http.HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
+        long id = 1L;
+        Map<Long, UsersDataSet> usersDataSetMap = new HashMap<>();
+
+
+            try {
+
+                while (accountService.getUserById(id) != null){
+
+                    System.out.println("this is ID" + id);
+                    usersDataSetMap.put(id, accountService.getUserById(id));
+                    id++;
+
+
+                }
+
+            }catch (DBException dbe){
+
+                dbe.printStackTrace();
+            }
 
         response.setContentType("text/html;charset=UTF-8");
-
-//        if( ( login == null || login.isEmpty() ) || (password == null || password.isEmpty() ) ){
-
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//        } else {
-//            try{
-//                accountService.addNewUser(login, password);
-
-//            }catch (DBException e){
-//                e.printStackTrace();
-//            }
-
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println("This is a response");
-//        }
+        response.setStatus(HttpServletResponse.SC_OK);
+//        response.getWriter().println((PageGenerator.instance().getPage()));
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
