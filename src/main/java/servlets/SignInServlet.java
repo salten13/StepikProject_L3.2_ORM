@@ -31,9 +31,7 @@ public class SignInServlet extends javax.servlet.http.HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        // I NEED ADD getBYNAME METHOD TO GET accountName and accountPass from datebase
-        // and then compare them with request params and if true then authorized else unauthorized
-
+  // and then compare them with request params and if true then authorized else unauthorized
         try{
             long id = accountService.getId(login);
             UsersDataSet usersDataSet = accountService.getUserById(id);

@@ -23,25 +23,6 @@ public class AllUsersServlet extends javax.servlet.http.HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        long id = 1L;
-        Map<Long, UsersDataSet> usersDataSetMap = new HashMap<>();
-
-
-            try {
-
-                while (accountService.getUserById(id) != null){
-
-                    System.out.println("this is ID" + id);
-                    usersDataSetMap.put(id, accountService.getUserById(id));
-                    id++;
-
-
-                }
-
-            }catch (DBException dbe){
-
-                dbe.printStackTrace();
-            }
 
         response.setContentType("text/html;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
