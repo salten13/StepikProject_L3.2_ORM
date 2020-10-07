@@ -5,6 +5,8 @@ import dbService.DBService;
 import dbService.DBServiceImpl;
 import dbService.dataSets.UsersDataSet;
 
+import java.util.List;
+
 /**
  * @author v.chibrikov
  *         <p>
@@ -31,5 +33,10 @@ public class AccountService {
 
     public long getId(String login) throws DBException {
         return dbService.getUserId(login);
+    }
+
+    public List<UsersDataSet> getAlldataListFromDB() throws DBException {
+        return dbService.getAlldataList();
+
     }
 }

@@ -2,29 +2,16 @@ package main;
 
 
 import dbService.DBService;
-import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.ContextHandler;
-import org.eclipse.jetty.server.handler.DefaultHandler;
-import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.util.resource.Resource;
-import servlets.AllUsersServlet;
+import servlets.AdminServlet;
 import servlets.SignInServlet;
 import servlets.SignUpServlet;
 
 import accounts.AccountService;
-import dbService.DBException;
 import dbService.DBServiceImpl;
-import dbService.dataSets.UsersDataSet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.server.handler.ResourceHandler;
-import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import servlets.UserServlet;
 
 /**
  * @author v.chibrikov
@@ -45,7 +32,8 @@ public class Main {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
         context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/signin");
-        context.addServlet(new ServletHolder(new AllUsersServlet(accountService)), "/allusers");
+        context.addServlet(new ServletHolder(new AdminServlet(accountService)), "/admin1");
+        context.addServlet(new ServletHolder(new UserServlet(accountService)), "/admin1/users");
 
 
 
@@ -70,10 +58,7 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        List<UsersDataSet> vasya =  dbService.getAlldataList();
-        for(UsersDataSet u : vasya){
-            System.out.println(u.getId() + "   " + u.getLogin() + "   " + u.getPassword());
-        }
+
 
 
         Server server = new Server(8080);
